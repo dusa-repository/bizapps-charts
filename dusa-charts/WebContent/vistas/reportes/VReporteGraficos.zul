@@ -1,0 +1,141 @@
+<zk>
+	<div height="100%" style="background-color: white" id="divVReporte"
+		width="100%" apply="sevadu.controlador.reporte.CReporte">
+		<groupbox width="100%" mold="3d" title="Reportes">
+			<div id="botoneraReporte" />
+			<separator />
+			<grid width="100%">
+				<columns visible="false">
+					<column label="" width="13%" />
+					<column label="" width="17%" />
+					<column label="" width="10%" />
+					<column label="" width="17%" />
+					<column label="" width="23%" />
+				</columns>
+				<rows>
+					<row id="rowAliado" visible="false">
+						<label class="etiqueta" value="Aliado:" />
+						<textbox id="txtAliado" hflex="1" maxlength="20"
+							tooltiptext="Seleccione del Catalogo el Codigo del Aliado" />
+						<button autodisable="self"  id="btnBuscarAliado" label="Buscar"
+							tooltiptext="Catalogo de Codigos de Aliados" image="/public/imagenes/botones/buscar.png"
+							class="btn" />
+						<cell colspan="2">
+							<label id="lblAliado" />
+						</cell>
+					</row>
+					<row>
+						<label class="etiqueta" value="Reporte a Consultar:" />
+						<cell colspan="3">
+							<combobox tooltiptext="Seleccione un Reporte"
+								placeholder="Seleccione un Reporte" id="cmbReporte" readonly="true"
+								width="100%">
+								<comboitem label="Grafico Venta de Marcas" />
+								<comboitem label="Grafico Vendido VS Planificado Marcas" />
+								<comboitem label="Grafico Volumen de Ventas por Marca y Producto" />
+								<comboitem label="Grafico Porcentaje de Participacion en Ventas(Marcas)" />
+								<comboitem label="Grafico de Comparacion entre Ventas/Compras/Inventario/Plan Ventas" />
+								<comboitem label="Grafico Vendido VS Planificado Marcas (Angular)" />
+								<comboitem label="Grafico Vendido VS Activado Marcas (Angular)" />
+								<!-- <comboitem label="(G55420001)Grafico de Activacion/Marca" /> -->
+								<!-- <comboitem label="(R55420025)Generar Objetivos/Marca/Clientes 
+									(EXCEL)" /> -->
+							</combobox>
+						</cell>
+						<hbox />
+						
+					</row>
+					<row>
+						<hbox>
+							<label class="etiqueta" value="Desde:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<datebox width="100%" readonly="true" id="dtbDesde"
+							constraint="no future" onCreate="self.value = new Date()"
+							tooltiptext="Seleccione el inicio del Periodo a buscar" />
+						<hbox>
+							<label class="etiqueta" value="Hasta:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<datebox width="100%" readonly="true" id="dtbHasta"
+							onCreate="self.value = new Date()" tooltiptext="Seleccione el fin del Periodo a buscar" />
+						<hbox />
+					</row>
+					<row id="rowZona">
+						<label class="etiqueta" value="Zona:" />
+						<combobox tooltiptext="Seleccione una Zona" placeholder="Seleccione una Zona"
+							id="cmbZona" value="TODAS" readonly="true" width="100%">
+							<template name="model">
+								<comboitem label="${each}" />
+							</template>
+						</combobox>
+						<label class="etiqueta" value="Cliente:" />
+						<combobox tooltiptext="Seleccione un Cliente"
+							placeholder="Seleccione un Cliente" id="cmbCliente" value="TODOS"
+							readonly="true" width="100%">
+							<template name="model">
+								<comboitem label="${each}" />
+							</template>
+						</combobox>
+						<hbox />
+					</row>
+					<row id="rowVendedor">
+						<label class="etiqueta" value="Vendedor Aliado:" />
+						<combobox tooltiptext="Seleccione un Vendedor"
+							placeholder="Seleccione un Vendedor" id="cmbVendedor" value="TODOS"
+							readonly="true" width="100%">
+							<template name="model">
+								<comboitem label="${each}" />
+							</template>
+						</combobox>
+						<hbox />
+						<hbox />
+						<hbox />
+					</row>
+				</rows>
+			</grid>
+			<separator />
+			<hbox id="box" visible="false" width="80%" widths="48%,5%,47%">
+				<listbox mold="paging" pageSize="6" id="ltbMarcas" height="280px"
+					width="100%" emptyMessage="No hay Marcas Registradas">
+					<listhead>
+						<listheader label="Nombre Marca" width="85%" />
+						<listheader label="Codigo" width="15%" />
+					</listhead>
+					<template name="model">
+						<listitem>
+							<listcell label="${each.descripcion}" />
+							<listcell label="${each.marcaDusa}" />
+						</listitem>
+					</template>
+				</listbox>
+				<vbox>
+					<button class="abrir" id="pasar1"
+						image="/public/imagenes/botones/adelante.png" tooltiptext="Agregar Marca"
+						width="30px" />
+					<separator />
+					<button class="abrir" id="pasar2"
+						image="/public/imagenes/botones/atras.png" tooltiptext="Quitar Marca"
+						width="30px" />
+				</vbox>
+				<listbox id="ltbMarcasAgregadas" mold="paging" pageSize="6"
+					height="280px" width="100%" emptyMessage="No ha Seleccionado Ningúna Marca">
+					<listhead>
+						<listheader label="Nombre Marca" width="85%" />
+						<listheader label="Codigo" width="15%" />
+					</listhead>
+					<template name="model">
+						<listitem>
+							<listcell label="${each.descripcion}" />
+							<listcell label="${each.marcaDusa}" />
+						</listitem>
+					</template>
+				</listbox>
+			</hbox>
+			<separator />
+			<div id="divCatalogoAliado" tooltiptext="Click para Seleccionar un Aliado" />
+		</groupbox>
+	</div>
+</zk>
